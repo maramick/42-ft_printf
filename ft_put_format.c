@@ -37,9 +37,37 @@ size_t	ft_putnbr_int(int n, size_t byte)
 	return (byte);
 }
 
-size_t	ft_putaddr(unsigned int addr, size_t byte)
+size_t	ft_putaddr(unsigned long addr, size_t byte)
 {
-	byte = ft_putnbr_base((int)addr, 16U, byte);
+	char buffer[100];
+	int i = 0;
+
+	if (addr == 0)
+	{
+		write(1, "0x0", 3);
+		return (3);
+	}
+	while (addr > 0)
+	{
+		buffer[i++] = (addr % 16) + '0';
+		if (addr % 16 >= 10) {
+			buffer[i - 1] += 7;
+		}
+		addr /= 16;
+	}
+	buffer[i] = '\0';
+
+	write(1, "0x", 2);
+	byte += 2;
+	i--;
+	while (i >= 0)
+	{
+		if (buffer[i] >= 'A' && buffer[i] <= 'Z')
+			buffer[i] = buffer[i] + 32;
+		write(1, &buffer[i], 1);
+		byte++;
+		i--;
+	}
 	return (byte);
 }
 
@@ -62,7 +90,7 @@ size_t	ft_put_format(const char *format, va_list ptr)
 	else if (*format == 's')
 		byte = ft_putstr(va_arg(ptr, char *), 0);
 	else if (*format == 'p')
-		byte = ft_putaddr(va_arg(ptr, void *), 0);
+		byte = ft_putaddr((uintptr_t)va_arg(ptr, void *), 0);
 	else if (*format == 'd' || *format == 'i')
 		byte = ft_putnbr_base(va_arg(ptr, int), 10U, 0);
 	else if (*format == 'u')
