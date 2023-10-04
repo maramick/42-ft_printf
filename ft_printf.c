@@ -69,11 +69,11 @@ int	main(void)
 	(void)str;
 
 	////my ft_printf////
-	printf("->my_printf : %d\n", ft_printf("%p  ", str));
+	printf("->my_printf : %d\n", ft_printf("%p \n%s", str, str));
 	////////////////////
 
 	////or ft_printf////
-	printf("->or_printf : %d\n", printf("%p  ", str));
+	printf("->or_printf : %d\n", printf("%p \n%s", str, str));
 	////////////////////
 	return (0);
 }
