@@ -64,16 +64,16 @@ int	ft_printf(const char *format, ...)
 int	main(void)
 {
 	char	str[10] = "Phanuwat";
-	int		n = -123123443;
+	//int		n = -123123443;
 
 	(void)str;
 
 	////my ft_printf////
-	printf("->my_printf : %d\n", ft_printf("%d\n\t", n));
+	printf("->my_printf : %d\n", ft_printf("%p\n\t", str));
 	////////////////////
 
 	////or ft_printf////
-	printf("->or_printf : %d\n", printf("%d\n\t", n));
+	printf("->or_printf : %d\n", printf("%p\n\t", str));
 	////////////////////
 	return (0);
 }

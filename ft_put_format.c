@@ -37,18 +37,41 @@ size_t	ft_putnbr_int(int n, size_t byte)
 	return (byte);
 }
 
+size_t	ft_putaddr(unsigned int addr, size_t byte)
+{
+	byte = ft_putnbr_base((int)addr, 16U, byte);
+	return (byte);
+}
+
+size_t	ft_putnbr_base(int n, unsigned int base, size_t byte)
+{
+	(void)n;
+	(void)base;
+	return (byte);
+}
+
+
 size_t	ft_put_format(const char *format, va_list ptr)
 {
 	size_t byte;
 
 	byte = 0;
 	format++;
-	if (*format == 's')
+	if (*format == 'c')
+		byte = ft_putchar(*format);
+	else if (*format == 's')
 		byte = ft_putstr(va_arg(ptr, char *), 0);
-	else if (*format == 'd')
-		byte = ft_putnbr_int(va_arg(ptr, int), 0);
+	else if (*format == 'p')
+		byte = ft_putaddr(va_arg(ptr, void *), 0);
+	else if (*format == 'd' || *format == 'i')
+		byte = ft_putnbr_base(va_arg(ptr, int), 10U, 0);
+	else if (*format == 'u')
+		byte = ft_putnbr_int(va_arg(ptr, unsigned int), 0);
+	else if (*format == 'x' || *format == 'X')
+		byte = ft_putnbr_base(va_arg(ptr, int), 16U, 0);
+	else if (*format == '%')
+		byte = ft_putchar(*format);
 	else
 		byte = ft_putchar(*format);
-	printf("%zu", byte);
 	return (byte);
 }
