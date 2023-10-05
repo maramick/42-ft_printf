@@ -1,29 +1,19 @@
 #include "ft_printf.h"
 
-// int LargestNumber(int n, ...)
-// {
-// 	va_list ptr;
+int	main(void)
+{
+	char	str[100] = "Phanuwat";
+	//int		n = -123123443;
 
-// 	va_start(ptr, n);
+	(void)str;
 
-// 	int max = va_arg(ptr, int);
+	////my ft_printf////
+	printf("->my_printf : %d\n", ft_printf("\001\002\007\v\010\f\r\n"));
+	////////////////////
 
-// 	for (int i = 0; i < n-1; i++) {
-// 		int temp = va_arg(ptr, int);
-// 		max = temp > max ? temp : max;
-// 	}
-// 	va_end(ptr);
-// 	return max;
-// }
-// int main()
-// {
-// 	printf("\n\n Variadic functions: \n");
-// 	printf("\n %d ", LargestNumber(2, 1, 2));
-// 	printf("\n %d ", LargestNumber(3, 3, 4, 5));
-
-// 	printf("\n %d ", LargestNumber(4, 6, 7, 8, 9));
-
-// 	printf("\n");
-
-// 	return 0;
-// }
+	////or ft_printf////
+	printf("->or_printf : %d\n", printf("\001\002\007\v\010\f\r\n"));
+	////////////////////
+	printf("\n\n\n\n");
+	return (0);
+}

@@ -11,11 +11,13 @@
 //////////////////////////
 
 size_t	ft_put_format(const char *format, va_list ptr);
-size_t	ft_putnbr_base(int n, unsigned int base, size_t byte);
+size_t	ft_putnbr_unsigned_int(unsigned int n, size_t byte);
+size_t	ft_putnbr_base(unsigned int n, char format, size_t byte);
 size_t	ft_putaddr(unsigned long addr, size_t byte);
 size_t	ft_putnbr_int(int n, size_t byte);
 size_t	ft_putstr(char *s, size_t byte);
 size_t	ft_putchar(char c);
 size_t	ft_strlen(const char *s);
+int		ft_printf(const char *format, ...);
 
 #endif

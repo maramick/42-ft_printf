@@ -61,19 +61,4 @@ int	ft_printf(const char *format, ...)
 	return (ret);
 }
 
-int	main(void)
-{
-	char	str[100] = "Phanuwat";
-	//int		n = -123123443;
 
-	(void)str;
-
-	////my ft_printf////
-	printf("->my_printf : %d\n", ft_printf("%p \n%s", str, str));
-	////////////////////
-
-	////or ft_printf////
-	printf("->or_printf : %d\n", printf("%p \n%s", str, str));
-	////////////////////
-	return (0);
-}
