@@ -1,25 +1,26 @@
 #include "ft_printf.h"
 
-size_t	ft_putchar(char c)
+ssize_t	ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-size_t	ft_putstr(char *s, size_t byte)
+ssize_t	ft_putstr(char *s, ssize_t byte)
 {
 	if (s)
 		byte = ft_strlen(s);
 	else if (!s)
 	{
 		byte = 6;
-		write(1, "(null)", byte);
+		if(write(1, "(null)", byte) < 0)
+			return (-1);
 	}
 	write(1, s, byte);
 	return (byte);
 }
 
-size_t	ft_putnbr_int(int n, size_t byte)
+ssize_t	ft_putnbr_int(int n, ssize_t byte)
 {
 	char	x;
 
@@ -42,7 +43,7 @@ size_t	ft_putnbr_int(int n, size_t byte)
 	return (byte);
 }
 
-size_t	ft_putnbr_unsigned_int(unsigned int n, size_t byte)
+ssize_t	ft_putnbr_unsigned_int(unsigned int n, ssize_t byte)
 {
 	char	x;
 
@@ -60,7 +61,7 @@ size_t	ft_putnbr_unsigned_int(unsigned int n, size_t byte)
 	return (byte);
 }
 
-size_t	ft_putaddr(unsigned long addr, size_t byte)
+ssize_t	ft_putaddr(unsigned long addr, ssize_t byte)
 {
 	char buffer[100];
 	int i = 0;
@@ -94,7 +95,7 @@ size_t	ft_putaddr(unsigned long addr, size_t byte)
 	return (byte);
 }
 
-size_t	ft_putnbr_base(unsigned int n, char format, size_t byte)
+ssize_t	ft_putnbr_base(unsigned int n, char format, ssize_t byte)
 {
 	char buffer[100];
 	int i = 0;
@@ -121,37 +122,8 @@ size_t	ft_putnbr_base(unsigned int n, char format, size_t byte)
 			buffer[i] = buffer[i] + 32;
 		write(1, &buffer[i], 1);
 		byte++;
-		//printf("byte: %zu buffer: %d", byte, buffer[i]);
 		i--;
 	}
 	return (byte);
 }
 
-size_t	ft_put_format(const char *format, va_list ptr)
-{
-	size_t	byte;
-	char	buf;
-
-	byte = 0;
-	format++;
-	if (*format == 'c')
-	{
-		buf = (char)va_arg(ptr, char *);
-		byte = ft_putchar(buf);
-	}
-	else if (*format == 's')
-		byte = ft_putstr(va_arg(ptr, char *), 0);
-	else if (*format == 'p')
-		byte = ft_putaddr((uintptr_t)va_arg(ptr, void *), 0);
-	else if (*format == 'd' || *format == 'i')
-		byte = ft_putnbr_int(va_arg(ptr, signed int), 0);
-	else if (*format == 'u')
-		byte = ft_putnbr_unsigned_int(va_arg(ptr, unsigned int), 0);
-	else if (*format == 'x' || *format == 'X')
-		byte = ft_putnbr_base(va_arg(ptr,unsigned int), *format, 0);
-	else if (*format == '%')
-		byte = ft_putstr("%", 0);
-	else
-		byte = ft_putchar(*format);
-	return (byte);
-}
