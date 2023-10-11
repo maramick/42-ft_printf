@@ -11,7 +11,7 @@
 //////////////////////////
 
 ssize_t	ft_putchar(char *c);
-ssize_t ft_putnb_hex(unsigned long addr, char format, ssize_t byte, int check);
+ssize_t	ft_putnb_hex(unsigned long addr, char format, ssize_t byte, int check);
 ssize_t	ft_putnbr_unsigned(unsigned int n, ssize_t byte, int check);
 ssize_t	ft_putnbr_signed(int n, ssize_t byte, int check);
 ssize_t	ft_putaddr(unsigned long addr, ssize_t byte);

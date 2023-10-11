@@ -1,21 +1,6 @@
 #include "ft_printf.h"
 
-/*This is for %c*/
-ssize_t	ft_putchar(char *c)
-{
-	return (write(1, c, 1));
-}
-
-/*This is for %s*/
-ssize_t	ft_putstr(char *s)
-{
-	if (!s)
-		return (write(1, "(null)", 6));
-	else
-		return (write(1, s, ft_strlen(s)));
-}
-
-ssize_t ft_putnb_hex(unsigned long addr, char format, ssize_t byte, int check)
+ssize_t	ft_putnb_hex(unsigned long addr, char format, ssize_t byte, int check)
 {
 	if (check == -1)
 		return (-1);
@@ -35,8 +20,7 @@ ssize_t ft_putnb_hex(unsigned long addr, char format, ssize_t byte, int check)
 	return (byte);
 }
 
-/*This is for %p*/
-ssize_t ft_putnb_addr(unsigned long addr, ssize_t byte, int check)
+ssize_t	ft_putnb_addr(unsigned long addr, ssize_t byte, int check)
 {
 	if (check == -1)
 		return (-1);
@@ -48,7 +32,7 @@ ssize_t ft_putnb_addr(unsigned long addr, ssize_t byte, int check)
 	byte += 1;
 	return (byte);
 }
-/*This is for %p*/
+
 ssize_t	ft_putaddr(unsigned long addr, ssize_t byte)
 {
 	if (addr == 0)
@@ -61,7 +45,6 @@ ssize_t	ft_putaddr(unsigned long addr, ssize_t byte)
 	return (byte);
 }
 
-/*This is for %d & %i*/
 ssize_t	ft_putnbr_signed(int n, ssize_t byte, int check)
 {
 	char	x;
@@ -91,7 +74,6 @@ ssize_t	ft_putnbr_signed(int n, ssize_t byte, int check)
 	return (byte);
 }
 
-/*This is for %u*/
 ssize_t	ft_putnbr_unsigned(unsigned int n, ssize_t byte, int check)
 {
 	char	x;
@@ -113,30 +95,4 @@ ssize_t	ft_putnbr_unsigned(unsigned int n, ssize_t byte, int check)
 		return (-1);
 	byte++;
 	return (byte);
-}
-
-ssize_t	ft_put_format(const char *format, va_list ptr)
-{
-	char	buf;
-
-	format++;
-	if (*format == 'c')
-	{
-		buf = va_arg(ptr, int);
-		return (ft_putchar(&buf));
-	}
-	else if (*format == 's')
-		return ft_putstr(va_arg(ptr, char *));
-	else if (*format == 'p')
-		return ft_putaddr((uintptr_t)va_arg(ptr, void *), 0);
-	else if (*format == 'd' || *format == 'i')
-		return ft_putnbr_signed(va_arg(ptr, signed int), 0, 1);
-	else if (*format == 'u')
-		return ft_putnbr_unsigned(va_arg(ptr, unsigned int), 0, 1);
-	else if (*format == 'x' || *format == 'X')
-		return ft_putnb_hex(va_arg(ptr,unsigned int), *format, 0, 1);
-	else if (*format == '%')
-		return write(1, "%", 1);
-	else
-		return write(1, &format, 1);
 }
