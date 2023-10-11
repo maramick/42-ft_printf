@@ -3,8 +3,9 @@ CC = cc
 CFLAG = -Wall -Werror -Wextra
 
 SRC =	ft_printf.c \
-		ft_put_format.c \
-		ft_printf_utils.c
+		ft_printf_utils.c \
+		ft_read_format.c \
+		ft_put_format.c
 
 OBJ = $(SRC:.c=.o)
 

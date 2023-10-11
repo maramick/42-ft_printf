@@ -10,7 +10,7 @@ ssize_t	ft_put_format(const char *format, va_list ptr)
 	if (*format == 'c')
 	{
 		buf = va_arg(ptr, int);
-		byte = ft_putchar(buf);
+		byte = ft_putchar(&buf, 1);
 	}
 	else if (*format == 's')
 		byte = ft_putstr(va_arg(ptr, char *), 0);
@@ -23,8 +23,8 @@ ssize_t	ft_put_format(const char *format, va_list ptr)
 	else if (*format == 'x' || *format == 'X')
 		byte = ft_putnbr_base(va_arg(ptr,unsigned int), *format, 0);
 	else if (*format == '%')
-		byte = ft_putstr("%", 0);
+		byte = write(1, "%", 1);
 	else
-		byte = ft_putchar(*format);
+		byte = write(1, &format, 1);
 	return (byte);
 }
